@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Todo App{% endblock %}</title>
+    <!-- Link to your compiled Tailwind CSS -->
+    <link rel="stylesheet" href="{% static 'dist/styles.css' %}">
+</head>
+
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white border-b border-gray-200 py-4 mb-8 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 flex justify-between items-center">
+            <a href="/" class="text-xl font-bold text-blue-600">TaskMaster</a>
+            <div class="space-x-4">
+                {% if user.is_authenticated %}
+        <!-- Only shown to logged-in users -->
+        <span class="text-gray-600 text-sm font-medium">Hello, {{ user.username }}</span>
+        
+        <form action="{% url 'logout' %}" method="post" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="text-sm font-semibold text-red-500 hover:text-red-700 transition">
+                Logout
+            </button>
+        </form>
+    {% else %}
+        <!-- Shown only when logged out -->
+        <div class="space-x-4">
+            <a href="{% url 'login' %}" class="text-sm font-semibold text-blue-600 hover:text-blue-800">Login</a>
+            <a href="{% url 'register' %}" class="text-sm font-semibold text-gray-700 hover:text-gray-900 border border-gray-300 px-3 py-1.5 rounded-lg">Register</a>
+        </div>
+    {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-4xl mx-auto px-4 pb-12">
+        {% block content %}
+        <!-- Page-specific content goes here -->
+        {% endblock %}
+    </main>
+
+    <footer class="text-center py-8 text-gray-400 text-xs">
+        &copy; 2026 TaskMaster Django App
+    </footer>
+
+</body>
+
+</html>

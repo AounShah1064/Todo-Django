@@ -34,7 +34,7 @@ class index(LoginRequiredMixin, View):
     def get(self, request):
         form = TaskForm()
     
-        tasks = task.objects.all()
+        tasks = task.objects.filter(user=request.user)
     
         context = {
             'tasks': tasks,
@@ -47,7 +47,9 @@ class index(LoginRequiredMixin, View):
         form = TaskForm(request.POST)
         
         if form.is_valid():
-            form.save()
+            task_instance = form.save(commit=False)
+            task_instance.user = request.user
+            task_instance.save()
             form = TaskForm()
         return redirect('/')
 

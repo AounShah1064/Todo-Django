@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
@@ -7,5 +8,6 @@ urlpatterns = [
     path('delete-task/<str:pk>/', views.deleteTask.as_view(), name='delete-task'),
     
     path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('register/', views.RegisterView.as_view(), name='register'),
 ]

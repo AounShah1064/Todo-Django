@@ -1,10 +1,50 @@
-<H1>Update Tasks:</H1>
+{% extends 'base.html' %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    Title: {{ TaskForm.title }}
-    Description: {{ TaskForm.description }}<br>
-    Completed: {{ TaskForm.completed }}
+{% block title %}Update Task{% endblock %}
 
-    <input type="submit" name="Update Task">  
-</form>
+{% block content %}
+<div class="max-w-xl mx-auto">
+    <!-- Breadcrumb / Back Link -->
+    <a href="/" class="text-sm text-blue-600 hover:underline mb-4 inline-block">
+        &larr; Back to Dashboard
+    </a>
+
+    <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-200">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Update Task</h1>
+
+        <form method="POST" action="" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Title Field -->
+            <div class="space-y-1">
+                <label class="block text-sm font-semibold text-gray-700">Task Title</label>
+                {{ TaskForm.title }}
+            </div>
+
+            <!-- Description Field -->
+            <div class="space-y-1">
+                <label class="block text-sm font-semibold text-gray-700">Description</label>
+                {{ TaskForm.description }}
+            </div>
+
+            <!-- Completed Checkbox -->
+            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                {{ TaskForm.completed }}
+                <label class="text-sm font-medium text-gray-700 cursor-pointer">
+                    Mark this task as completed
+                </label>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-4 pt-4">
+                <button type="submit" class="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition shadow-sm">
+                    Save Changes
+                </button>
+                <a href="/" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-lg font-bold hover:bg-gray-200 transition text-center border border-gray-200">
+                    Cancel
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,76 @@
-<h2>Create an Account</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Register</button>
-</form>
-<p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+{% extends 'base.html' %}
+
+{% block title %}Create an Account{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto mt-12 mb-12">
+    <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-extrabold text-gray-900">Get Started</h2>
+            <p class="text-gray-500 mt-2 text-sm">Create your account to start managing tasks</p>
+        </div>
+
+        <form method="post" class="space-y-4 registration-form">
+            {% csrf_token %}
+            
+            <!-- Styled container for form.as_p -->
+            <div class="django-form-container">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition-all shadow-lg shadow-green-100 mt-4">
+                Create Account
+            </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-gray-100 text-center">
+            <p class="text-gray-600 text-sm">
+                Already have an account? 
+                <a href="{% url 'login' %}" class="text-blue-600 font-bold hover:underline ml-1">Login here</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Styling the paragraphs, labels, and inputs rendered by form.as_p */
+    .django-form-container p {
+        margin-bottom: 1.25rem;
+    }
+    .django-form-container label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 0.35rem;
+    }
+    .django-form-container input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        outline: none;
+        transition: all 0.2s;
+    }
+    .django-form-container input:focus {
+        border-color: #10b981; /* Green focus for registration */
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    /* Styling for Django's built-in help text (e.g., password requirements) */
+    .django-form-container .helptext {
+        display: block;
+        font-size: 0.75rem;
+        color: #6b7280;
+        margin-top: 0.25rem;
+        line-height: 1.4;
+    }
+    /* Styling for validation errors */
+    .django-form-container .errorlist {
+        color: #ef4444;
+        font-size: 0.875rem;
+        margin-bottom: 0.5rem;
+        list-style: none;
+        padding: 0;
+    }
+</style>
+{% endblock %}
