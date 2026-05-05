@@ -1,0 +1,10 @@
+<H1>Update Tasks:</H1>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    Title: {{ TaskForm.title }}
+    Description: {{ TaskForm.description }}<br>
+    Completed: {{ TaskForm.completed }}
+
+    <input type="submit" name="Update Task">  
+</form>

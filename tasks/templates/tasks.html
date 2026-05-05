@@ -1,0 +1,22 @@
+<H1>Tasks:</H1>
+
+<form method="POST">
+    {% csrf_token %}
+    Title: {{ TaskForm.title }}
+    Description: {{ TaskForm.description }}
+    Completed: {{ TaskForm.completed }}
+
+    <input type="submit" name="Add Task">  
+</form>
+
+
+{% for task in tasks %}
+
+    <br>
+    <p>Title: {{ task.title }}</p>
+    <p>Description: {{ task.description }}</p>
+    <p>Completed: {{ task.completed }}</p>
+    <a href="{% url 'update-task' task.id %}">Update</a>
+    <a href="{% url 'delete-task' task.id %}">Delete</a>
+    <br>
+{% endfor %}
